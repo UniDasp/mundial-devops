@@ -1,0 +1,41 @@
+name: Mundial CI/CDD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - name: Login ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build image
+        run: |
+          docker build -t mundial-app .
+
+      - name: Tag image
+        run: |
+          docker tag mundial-app:latest \
+          743808480480.dkr.ecr.us-east-1.amazonaws.com/mundial-app:latest
+
+      - name: Push image
+        run: |
+          docker push \
+          743808480480.dkr.ecr.us-east-1.amazonaws.com/mundial-app:latest
+
+      - name: Deploy EKS
+        run: echo "Configurar kubectl y actualizar deployment"
