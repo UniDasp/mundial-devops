@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mundial-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mundial-app
+  template:
+    metadata:
+      labels:
+        app: mundial-app
+    spec:
+      containers:
+      - name: mundial-app
+        image: 743808480480.dkr.ecr.us-east-1.amazonaws.com/mundial-app:latest
+        ports:
+        - containerPort: 5000
