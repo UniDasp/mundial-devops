@@ -1,4 +1,4 @@
-name: Mundial CI/CDD
+name: Mundial CI/CD
 
 on:
   push:
