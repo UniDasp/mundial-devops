@@ -30,12 +30,12 @@ jobs:
       - name: Tag image
         run: |
           docker tag mundial-app:latest \
-          743808480480.dkr.ecr.us-east-1.amazonaws.com/mundial-app:latest
+          737309766682.dkr.ecr.us-east-1.amazonaws.com/mundial-app:latest
 
       - name: Push image
         run: |
           docker push \
-          743808480480.dkr.ecr.us-east-1.amazonaws.com/mundial-app:latest
+          737309766682.dkr.ecr.us-east-1.amazonaws.com/mundial-app:latest
 
       - name: Deploy EKS
         run: echo "Configurar kubectl y actualizar deployment"
